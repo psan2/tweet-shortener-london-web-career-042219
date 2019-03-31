@@ -42,6 +42,7 @@ def word_substituter(tweet)
       temp_word.capitalize
     when 1
       temp_word.upcase
+    end
   end
   tweet_subs.join(" ")
 end
