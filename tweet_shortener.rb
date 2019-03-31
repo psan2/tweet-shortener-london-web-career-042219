@@ -27,31 +27,23 @@ def cap_setting(word)
 end
 
 def word_substituter(tweet)
-  short_tweet = []
   tweet_subs = tweet.split
-  tweet_subs.map do |word|
+  tweet_subs.map! do |word|
+    cap = cap_setting(word)
     if dictionary(word.downcase) == nil
-      case cap_setting(word)
-      when -1
-        short_tweet.push(word)
-      when 0
-        short_tweet.push(word.capitalize)
-      when 1
-        short_tweet.push(word.upcase)
-      end
+      temp_word = word
     else
-      case cap_setting(word)
-      when -1
-        short_tweet.push(dictionary(word))
-      when 0
-        short_tweet.push(dictionary(word).capitalize)
-      when 1
-        short_tweet.push(dictionary(word).upcase)
-      end
+      temp_word = dictionary(word.downcase)
     end
-    binding.pry
+    case cap
+    when -1
+      temp_word
+    when 0
+      temp_word.capitalize
+    when 1
+      temp_word.upcase
   end
-  short_tweet.join(" ")
+  tweet_subs.join(" ")
 end
 
 def bulk_tweet_shortener(tweet_array)
